@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { View, Text } from 'react-native';
 
-const TabIndexScreen: FC = () => {
+const ExchangeScreen: FC = () => {
   return (
     <View className="p-safe flex-1 bg-white">
       <Text className="text-blue text-bold text-sm leading-tight">In tab Screen</Text>
@@ -9,4 +9,4 @@ const TabIndexScreen: FC = () => {
   );
 };
 
-export default TabIndexScreen;
+export default ExchangeScreen;
