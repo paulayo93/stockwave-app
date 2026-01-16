@@ -1,118 +1,92 @@
-# StockWave - Stock Tracking App
+# Stockwave - Stock Market Tracker
 
-A modern React Native stock tracking application built with Expo, TypeScript, and TailwindCSS (NativeWind).
-
-## Features
-
-- Real-time stock price tracking (mock data)
-- Interactive stock charts
-- Wishlist functionality
-- Responsive mobile UI
-- Modern design with TailwindCSS
-- Detailed stock information
-- Market indices (S&P 500, DOW)
+A React Native mobile application built for the INITS Limited technical assessment.---
 
 ## Tech Stack
 
-- **React Native** - Mobile framework
-- **Expo** - Development platform
-- **TypeScript** - Type safety
-- **Expo Router** - File-based navigation
-- **NativeWind** - TailwindCSS for React Native
-- **React Native SVG** - Chart rendering
-- **React Native Reanimated** - Animations
+- **Framework:** Expo (React Native) with Expo Router (File-based navigation).
+- **Styling:** NativeWind (Tailwind CSS for React Native).
+- **Language:** TypeScript with strict type checking.
+- **Icons & Graphics:** `react-native-svg` for resolution-independent assets.
+- **Data Management:** React Context API with Custom Hooks.
 
-## Installation ef
+---
 
-1. Clone the repository
-2. Install dependencies:
+## Key Architectural Decisions
 
-```bash
-npm install
-```
+### 1. Componentized Design Pattern
 
-3. Start the development server:
+The UI is broken down into small, reusable components (e.g., `StockRow`, `IndexCard`, `MainChart`). This ensures a clear separation of concerns, making the codebase easier to test and maintain.
 
-```bash
-npx expo start
-```
+### 2. Performance-First Lists
 
-4. Run on your preferred platform:
-   - Press `i` for iOS simulator
-   - Press `a` for Android emulator
-   - Scan QR code with Expo Go app on your device
+Instead of using standard arrays and mapping, the app utilizes `FlatList` with the `ListHeaderComponent` pattern. This ensures:
+
+- **Lazy Rendering:** Only items on screen are rendered.
+- **Single Scroll Responder:** The entire screen scrolls as one unit without nested scroll warnings.
+- **Memory Efficiency:** Optimized for large datasets of financial instruments.
+
+### 3. State & Mock Data Management
+
+Data is centralized in a `StockProvider` using the Context API.
+
+- **Centralized Truth:** Components consume data via a `useMarketData` custom hook.
+- **Mock Utility:** Includes a dynamic chart data generator to simulate market volatility for visualization.
+
+### 4. Layout & Styling
+
+- **Safe Areas:** Managed using `react-native-safe-area-context` to handle notches and home indicators across iOS and Android.
+- **Typography:** Strict adherence to the Inter font family with defined weight variants for clear financial data hierarchy.
+
+### 5. File-Based Routing
+
+I chose Expo Router to align with modern Expo standards. This provides a clear project structure where the file system reflects the app's navigation flow (/ for the list and /stock/[id] for details).
+
+### 6. Design System with NativeWind
+
+I used NativeWind to implement the UI. This allowed for:
+
+    Scannability: Rapid styling using utility classes.
+
+    Consistency: Shared design tokens (colors/spacing) via tailwind.config.js.
+
+    Performance: NativeWind compiles to standard React Native Stylesheets.
+
+### 7. TypeScript Strategy
+
+I avoided the use of any across the entire project. All components use defined interfaces for props, and the navigation system is fully typed to ensure that passing data between the list and detail screens is compile-time safe.
+
+---
 
 ## Project Structure
 
-# TODO: Add Project Structure
+- `app/` - Expo Router screens and layout definitions.
+- `src/components/` - Atomic UI components split by feature (ui, screens).
+- `src/context/` - Global state management using Context API.
+- `src/hooks/` - Custom hooks for data fetching and business logic.
+- `src/constants/` - Mock data and configuration.
+- `src/types/` - Centralized TypeScript interfaces.
+- `src/utils/` - Global formatters for currency and percentages.
 
-## Key Components
+---
 
-### Screens
+## Getting Started
 
-- **Home**: Portfolio overview, market indices, wishlist preview, and stock list
-- **Stock Detail**: Comprehensive stock information with charts and statistics
-- **Wishlist**: Favorite stocks quick access
+1. **Install dependencies:**
 
-### Data Management
+```bash
+npm install
 
-- Mock data with realistic chart generation
-- Type-safe interfaces
-- Utility functions for formatting
+```
 
-## Design Decisions
+2. **Start the development server:**
 
-- **Expo Router**: Chosen for file-based routing and type-safe navigation
-- **NativeWind**: Enables rapid UI development with familiar TailwindCSS syntax
-- **Component Architecture**: Focused on reusability and separation of concerns
-- **Mock Data**: Generates realistic chart data for demonstration
-- **TypeScript**: Ensures type safety across the application
-- **No Comments**: Clean, self-documenting code following best practices
+```bash
+npx expo start
 
-## Development
+```
 
-### Available Scripts
+3. **Run on a device/emulator:**
+   Press `i` for iOS or `a` for Android.
 
-- `npm start` - Start Expo development server
-- `npm run android` - Run on Android
-- `npm run ios` - Run on iOS
-- `npm run web` - Run on web
-- `npm run reset` - Clear cache and restart
-
-### Adding New Stocks
-
-Edit `data/mockData.ts` and add new stock objects to the `mockStocks` array.
-
-### Customizing Styles
-
-Modify `tailwind.config.js` to update the design system colors and theme.
-
-## Mock Data
-
-The app uses generated mock data including:
-
-- Stock prices and historical data
-- Market indices (S&P 500, DOW)
-- Portfolio value and performance
-- Chart data with realistic fluctuations
-
-## Future Enhancements
-
-- Real API integration
-- User authentication
-- Portfolio management
-- Real-time updates
-- News integration
-- Advanced charting options
-- Stock search functionality
-
-## Requirements
-
-- Node.js 18+
-- npm or yarn
-- iOS Simulator (Mac) or Android Emulator
-- Expo Go app for physical device testing
-
-## License
-
-MIT
+---

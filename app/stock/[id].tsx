@@ -32,7 +32,7 @@ export default function StockDetailScreen() {
           <ChevronLeft width={20} height={20} stroke="#0f172a" />
         </TouchableOpacity>
         <Text className="font-inter-bold text-lg">Detail Stock</Text>
-        <View className="w-10" /> {/* Spacer for balance */}
+        <View className="w-10" />
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false} className="flex-1 px-6">
