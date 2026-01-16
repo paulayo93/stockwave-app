@@ -1,15 +1,15 @@
-const { getDefaultConfig } = require("expo/metro-config");
-const { withNativeWind } = require("nativewind/metro");
+const { getDefaultConfig } = require('expo/metro-config');
+const { withNativeWind } = require('nativewind/metro');
 
 const config = getDefaultConfig(__dirname, {
-    isCSSEnabled: true,
+  isCSSEnabled: true,
 });
 
 config.transformer.minifierConfig = {
-    compress: {
-        /*remove console.log statement in production*/
-        drop_console: true,
-    }
-}
+  compress: {
+    /*remove console.log statement in production*/
+    drop_console: true,
+  },
+};
 
-module.exports = withNativeWind(config, { input: "./global.css" });
+module.exports = withNativeWind(config, { input: './global.css' });

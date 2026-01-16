@@ -38,9 +38,9 @@ npx expo start
 ```
 
 4. Run on your preferred platform:
-    - Press `i` for iOS simulator
-    - Press `a` for Android emulator
-    - Scan QR code with Expo Go app on your device
+   - Press `i` for iOS simulator
+   - Press `a` for Android emulator
+   - Scan QR code with Expo Go app on your device
 
 ## Project Structure
 
