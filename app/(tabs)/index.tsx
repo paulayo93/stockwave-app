@@ -1,12 +1,16 @@
-import React, { FC } from 'react';
-import { View, Text } from 'react-native';
+import React from 'react';
+import { ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { MainHeader } from '@/components/ui/MainHeader';
+import { PortfolioSummary } from '@/components/screens/stock/PortfolioSummary';
 
-const TabIndexScreen: FC = () => {
+export default function Home() {
   return (
-    <View className="p-safe flex-1 bg-white">
-      <Text className="text-blue text-bold text-sm leading-tight">In tab Screen</Text>
-    </View>
+    <SafeAreaView className="flex-1 bg-white" edges={['top']}>
+      <MainHeader />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <PortfolioSummary />
+      </ScrollView>
+    </SafeAreaView>
   );
-};
-
-export default TabIndexScreen;
+}
