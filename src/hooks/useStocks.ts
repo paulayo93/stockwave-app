@@ -1,19 +1,15 @@
-import { useState, useEffect } from 'react';
-import { MOCK_STOCKS } from '@/constants/mockData';
-import { Stock } from '@/types/stock.types';
+import { useStockContext } from '@/context/StockContext';
 
-export const useStocks = () => {
-  const [stocks, setStocks] = useState<Stock[]>([]);
-  const [loading, setLoading] = useState(true);
+export const useMarketData = () => {
+  const { stocks, marketIndices, portfolio, wishlist } = useStockContext();
 
-  useEffect(() => {
-    //delay
-    const timer = setTimeout(() => {
-      setStocks(MOCK_STOCKS);
-      setLoading(false);
-    }, 500);
-    return () => clearTimeout(timer);
-  }, []);
+  const getStockById = (id: string) => stocks.find(s => s.id === id);
 
-  return { stocks, loading };
+  return {
+    stocks,
+    marketIndices,
+    portfolio,
+    wishlist,
+    getStockById,
+  };
 };

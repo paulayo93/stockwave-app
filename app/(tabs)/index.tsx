@@ -1,23 +1,30 @@
 import React from 'react';
-import { FlatList, View, Text, ScrollView } from 'react-native';
+import { FlatList, View, Text, ScrollView, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useMarketData } from '@/hooks/useStocks';
 import { MainHeader } from '@/components/ui/MainHeader';
 import { PortfolioSummary } from '@/components/screens/stock/PortfolioSummary';
 import { IndexCard } from '@/components/screens/stock/IndexCard';
 import { WishlistCard } from '@/components/screens/stock/WishlistCard';
 import { StockRow } from '@/components/screens/stock/StockRow';
-import { MOCK_STOCKS } from '@/constants/mockData';
 
 export default function Home() {
+  const { stocks, marketIndices, wishlist } = useMarketData();
   const ListHeader = () => (
-    <View>
+    <View className="pb-4">
       <PortfolioSummary />
-
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} className="mb-8 pl-6">
-        <IndexCard symbol="S&P 500" name="Standard & Poor's" changePercentage="49.50" />
-        <IndexCard symbol="DOW" name="Dow Jones" changePercentage="12.30" />
-      </ScrollView>
-
+      <View>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.contentContainerStyle}
+          className="mb-8"
+        >
+          {marketIndices.map(index => (
+            <IndexCard key={index.symbol} index={index} />
+          ))}
+        </ScrollView>
+      </View>
       <View className="mb-8 px-6">
         <View className="mb-4 flex-row items-center justify-between">
           <Text className="font-inter-bold text-xl text-slate-900">Wishlist</Text>
@@ -25,12 +32,13 @@ export default function Home() {
             <Text className="font-bold text-indigo-600">+</Text>
           </View>
         </View>
+
         <View className="flex-row flex-wrap justify-between">
-          <WishlistCard stock={MOCK_STOCKS[0]} isNegative={true} />
-          <WishlistCard stock={MOCK_STOCKS[1]} />
+          {wishlist.map(stock => (
+            <WishlistCard key={stock.id} stock={stock} />
+          ))}
         </View>
       </View>
-
       <View className="mb-2 px-6">
         <Text className="font-inter-bold text-xl text-slate-900">Stocks</Text>
       </View>
@@ -42,7 +50,7 @@ export default function Home() {
       <MainHeader />
 
       <FlatList
-        data={MOCK_STOCKS}
+        data={stocks}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
           <View className="px-6">
@@ -50,10 +58,21 @@ export default function Home() {
           </View>
         )}
         ListHeaderComponent={ListHeader}
-        contentContainerStyle={{ paddingBottom: 40 }}
+        contentContainerStyle={styles.paddingBottom40}
         showsVerticalScrollIndicator={false}
         removeClippedSubviews={false}
+        initialNumToRender={10}
       />
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  paddingBottom40: {
+    paddingBottom: 40,
+  },
+  contentContainerStyle: {
+    paddingLeft: 24,
+    paddingRight: 12,
+  },
+});

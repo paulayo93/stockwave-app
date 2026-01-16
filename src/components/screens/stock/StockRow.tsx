@@ -9,7 +9,7 @@ interface StockRowProps {
 }
 
 export const StockRow: React.FC<StockRowProps> = ({ stock }) => {
-  const isPositive = stock.changePercentage >= 0;
+  const isPositive = stock.changePercent >= 0;
   const brandInitial = stock.symbol.charAt(0);
 
   return (
@@ -37,12 +37,12 @@ export const StockRow: React.FC<StockRowProps> = ({ stock }) => {
             ${stock.price.toLocaleString(undefined, { minimumFractionDigits: 2 })}
           </Text>
           <Text
-            className={`font-inter-semibold mt-1 text-xs ${
+            className={`mt-1 font-inter-semibold text-xs ${
               isPositive ? 'text-green-500' : 'text-red-500'
             }`}
           >
             {isPositive ? '+' : ''}
-            {stock.changePercentage}%
+            {stock.changePercent}%
           </Text>
         </View>
       </Pressable>
