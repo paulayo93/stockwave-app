@@ -1,6 +1,8 @@
 # Stockwave - Stock Market Tracker
 
-A React Native mobile application built for the INITS Limited technical assessment.---
+A React Native mobile application built for the INITS Limited technical assessment.
+
+---
 
 ## Tech Stack
 
@@ -92,3 +94,9 @@ npx expo start
 4. To run on Physical Device: Scan the QR code with Expo Go app
 
 ---
+
+## 📱 Screenshots
+
+|                          Home Screen                           |                           Stock Detail                           |
+| :------------------------------------------------------------: | :--------------------------------------------------------------: |
+| <img src="./assets/screenshots/home-screen.png" width="250" /> | <img src="./assets/screenshots/detail-screen.png" width="250" /> |
