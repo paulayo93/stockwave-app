@@ -89,4 +89,6 @@ npx expo start
 3. **Run on a device/emulator:**
    Press `i` for iOS or `a` for Android.
 
+4. To run on Physical Device: Scan the QR code with Expo Go app
+
 ---
